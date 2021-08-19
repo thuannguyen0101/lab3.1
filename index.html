@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+
+<div class="container">
+    <a type="button" class="btn btn-primary" href="form.html">add product</a>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">NAME</th>
+            <th scope="col">PRICE</th>
+            <th scope="col">THUMBNAIL</th>
+        </tr>
+        </thead>
+        <tbody id="demo">
+
+        </tbody>
+    </table>
+</div>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        $.ajax({
+            type: "get",
+            url: "http://127.0.0.1:8000/",
+            success: function (data) {
+                $('#demo').html('');
+                var result = JSON.parse(data)
+                for (let i = result.length - 1; i >= 0; i--) {
+                    $('#demo').append(`<tr>
+            <th scope="row">${result[i][0]}</th>
+            <td>${result[i][1]}</td>
+            <td>${result[i][2]}</td>
+            <td><img src="${result[i][3]}" width="100px" height="100px" alt=""></td>
+        </tr>`)
+                }
+
+
+            }
+        });
+    });
+</script>
+</body>
+</html>

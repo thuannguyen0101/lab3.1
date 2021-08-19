@@ -1,0 +1,55 @@
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <a type="button" class="btn btn-primary" href="index.html">list product</a>
+    <h2>Form test: product</h2>
+    <form>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text"  class="form-control" id="name" name="name">
+        </div>
+        <div class="form-group">
+            <label for="price">Price:</label>
+            <input type="number" class="form-control" id="price" name="price">
+        </div>
+        <div class="form-group">
+            <label for="thumbnail">Thumbnail:</label>
+            <input type="text" class="form-control" id="thumbnail" name="thumbnail">
+        </div>
+        <button type="button" id="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+
+<script>
+    $('#submit').click(function (){
+        $.ajax({
+            type: "post",
+            url: "http://127.0.0.1:8000/insert.php",
+            data:{
+                name:$('#name').val(),
+                price:$('#price').val(),
+                thumbnail:$('#thumbnail').val()
+            },
+            success: function (data) {
+                alert('thanh cong');
+                $('input').val('');
+            },
+            error: function (){
+                alert('ngu');
+            }
+        });
+    })
+</script>
+</body>
+</html>
